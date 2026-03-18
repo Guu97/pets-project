@@ -2,17 +2,26 @@
 
 REST API for pet management, developed with Spring Boot.
 
+## Database
+
+The application supports two databases via Spring `@Profile`:
+
+| Profile | Database | Command |
+|---------|----------|---------|
+| `jpa` (default) | H2 (Oracle mode) | `mvn spring-boot:run` |
+| `mongo` | MongoDB | `mvn spring-boot:run -Dspring-boot.run.profiles=mongo` |
+
 ## API Endpoints
 
 ### Pets
 
-| Metodo | Endpoint | Descrizione | Request Body | Response |
+| Method | Endpoint | Description | Request Body | Response |
 |--------|----------|-------------|--------------|----------|
-| `GET` | `/api/pets` | Lista tutti i pet | - | `200 OK` - Lista di pet |
-| `GET` | `/api/pets/{id}` | Recupera un pet per ID | - | `200 OK` / `404 Not Found` |
-| `POST` | `/api/pets` | Crea un nuovo pet | `PetRequest` | `201 Created` |
-| `PUT` | `/api/pets/{id}` | Aggiorna un pet esistente | `PetRequest` | `200 OK` / `404 Not Found` |
-| `DELETE` | `/api/pets/{id}` | Elimina un pet | - | `204 No Content` / `404 Not Found` |
+| `GET` | `/api/pets` | List all pets | - | `200 OK` - List of pets |
+| `GET` | `/api/pets/{id}` | Get a pet by ID | - | `200 OK` / `404 Not Found` |
+| `POST` | `/api/pets` | Create a new pet | `PetRequest` | `201 Created` |
+| `PUT` | `/api/pets/{id}` | Update an existing pet | `PetRequest` | `200 OK` / `404 Not Found` |
+| `DELETE` | `/api/pets/{id}` | Delete a pet | - | `204 No Content` / `404 Not Found` |
 
 ### Request Body
 
@@ -25,11 +34,11 @@ REST API for pet management, developed with Spring Boot.
 }
 ```
 
-| Campo | Tipo | Obbligatorio | Validazione |
-|-------|------|--------------|-------------|
-| `name` | String | Sì | Non vuoto |
-| `species` | String | Sì | Non vuoto |
-| `age` | Integer | No | ≥ 0 |
+| Field | Type | Required | Validation |
+|-------|------|----------|------------|
+| `name` | String | Yes | Not blank |
+| `species` | String | Yes | Not blank |
+| `age` | Integer | No | >= 0 |
 | `ownerName` | String | No | - |
 
 ### Response Body
@@ -44,7 +53,7 @@ REST API for pet management, developed with Spring Boot.
 }
 ```
 
-### Errori
+### Errors
 
 ```json
 {

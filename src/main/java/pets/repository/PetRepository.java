@@ -1,16 +1,25 @@
 package pets.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 import pets.model.Pet;
 
-/**
- * Repository interface for Pet entity persistence operations.
- * 
- * Extends JpaRepository for Oracle/relational database access.
- * When migrating to MongoDB, change to extend MongoRepository<Pet, Long>.
- */
-@Repository
-public interface PetRepository extends JpaRepository<Pet, Long> {
+import java.util.List;
+import java.util.Optional;
 
+/**
+ * Repository port interface for Pet entity persistence operations.
+ * 
+ * This abstraction allows switching between different database implementations
+ * (JPA/Oracle, MongoDB) via Spring profiles without changing the service layer.
+ */
+public interface PetRepository {
+
+    Pet save(Pet pet);
+
+    Optional<Pet> findById(Long id);
+
+    List<Pet> findAll();
+
+    void deleteById(Long id);
+
+    boolean existsById(Long id);
 }
